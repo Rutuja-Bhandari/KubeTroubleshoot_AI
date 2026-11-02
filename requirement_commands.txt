@@ -1,0 +1,15 @@
+pip install fastapi uvicorn
+pip install streamlit
+python -m pip install kubernetes
+chromadb
+langchain
+langchain-community
+langchain-text-splitters
+sentence-transformers
+ollama pull llama3.1:8b
+python -m pip install ollama
+python -m pip install scikit-learn
+winget install Helm.Helm
+helm install prometheus prometheus-community/kube-prometheus-stack -n monitoring
+python -m pip install requests
+pip install sqlalchemy

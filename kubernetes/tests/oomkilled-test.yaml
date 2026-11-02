@@ -1,0 +1,31 @@
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: oomkilled-test
+  namespace: default
+  labels:
+    app: kube-troubleshoot-test
+    scenario: oomkilled
+spec:
+  restartPolicy: Always
+  containers:
+    - name: memory-consumer
+      image: python:3.12-alpine
+      imagePullPolicy: IfNotPresent
+      command:
+        - python
+        - -c
+        - |
+          import time
+          chunks = []
+          while True:
+              chunks.append(bytearray(10 * 1024 * 1024))
+              time.sleep(0.1)
+      resources:
+        requests:
+          memory: "32Mi"
+          cpu: "100m"
+        limits:
+          memory: "64Mi"
+          cpu: "500m"

@@ -1,0 +1,32 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: imagepullbackoff-test
+  namespace: default
+  labels:
+    app: imagepullbackoff-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: imagepullbackoff-test
+  template:
+    metadata:
+      labels:
+        app: imagepullbackoff-test
+    spec:
+      containers:
+        - name: image-test
+          image: invalid-image-name:does-not-exist
+          imagePullPolicy: Always
+          command: ["/bin/sh", "-c"]
+          args:
+            - "echo 'Image pull test container started'; sleep 3600"
+          resources:
+            requests:
+              memory: "32Mi"
+              cpu: "50m"
+            limits:
+              memory: "64Mi"
+              cpu: "200m"

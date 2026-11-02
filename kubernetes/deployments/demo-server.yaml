@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: kube-demo-server
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: kube-demo-server
+
+  template:
+    metadata:
+      labels:
+        app: kube-demo-server
+
+    spec:
+      containers:
+        - name: kube-demo-server
+
+          image: kube-troubleshoot-demo-server:1.0
+
+          imagePullPolicy: IfNotPresent
+
+          ports:
+            - containerPort: 8000
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
